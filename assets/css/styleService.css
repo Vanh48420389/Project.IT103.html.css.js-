@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1F2937;
+    padding: 20px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: #f0f0f0;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4B5563;
+}
+
+.sidebar ul li .logout {
+    color: #ed4c3b;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: white;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.btn-add {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: #2980b9;
+}
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.service-table th,
+.service-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #f3f5f5;
+}
+
+.service-table th {
+    background-color: #f0f1f2;
+    font-size: 1em;
+}
+
+
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.service-table th,
+.service-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.service-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.service-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.service-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-edit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-edit:hover {
+    background-color: #45a049;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    justify-content: center;
+
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.modal-content label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.modal-content textarea {
+    resize: none;
+    height: 80px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-cancel {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background-color: #d32f2f;
+}
+
+.btn-save {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background-color: #45a049;
+}
+
+.modal {
+    display: none;
+}
+
+.modal.show {
+    display: flex;
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .main-content {
+        padding: 30px;
+    }
+
+    .header h2 {
+        font-size: 2em;
+    }
+
+    .btn-add {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+
+    .service-table th,
+    .service-table td {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .header h2 {
+        font-size: 1.8em;
+    }
+
+    .btn-add {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .service-table th,
+    .service-table td {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 150px;
+        padding: 10px;
+    }
+
+    .sidebar h2 {
+        font-size: 1.2em;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .header h2 {
+        font-size: 1.5em;
+    }
+
+    .btn-add {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .service-table th,
+    .service-table td {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+
+    .service-table {
+        font-size: 0.8em;
+    }
+}

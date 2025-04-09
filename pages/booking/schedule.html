@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../assets/css/styleBooking.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <h3>GYM MANAGEMENT</h3>
+        <div class="menu-links">
+            <a href="../../home.html" id="home-link">Trang Chủ</a>
+            <a href="./schedule.html" id="schedule-link">Lịch Tập</a>
+        </div>
+    </div>
+
+    <div class="content-container" id="schedule-management">
+        <div class="content-header">
+            <h2 id="schedule-title">Quản lý lịch tập</h2>
+            <button id="new-schedule-btn">Đặt lịch mới</button>
+        </div>
+        <div class="table-container">
+            <table id="schedule-table">
+                <tr>
+                    <th>Lớp Học</th>
+                    <th>Ngày Tập</th>
+                    <th>Khung Giờ</th>
+                    <th>Họ Tên</th>
+                    <th>Email</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="schedule-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Đặt lịch mới</h3>
+            <label for="class-type">Lớp học:</label>
+            <select id="class-type">
+                <option>Chọn lớp học</option>
+                <option>Gym</option>
+                <option>Yoga</option>
+                <option>Zumba</option>
+            </select>
+            <label for="date">Ngày tập:</label>
+            <input type="date" id="date">
+            <label for="time-slot">Khung giờ:</label>
+            <select id="time-slot">
+                <option>Chọn khung giờ</option>
+                <option>06:00 - 08:00</option>
+                <option>08:00 - 10:00</option>
+                <option>10:00 - 12:00</option>
+                <option>12:00 - 14:00</option>
+                <option>14:00 - 16:00</option>
+                <option>16:00 - 18:00</option>
+                <option>18:00 - 20:00</option>
+            </select>
+            <label for="user-name">Họ Tên:</label>
+            <input type="text" id="user-name" placeholder="Nhập họ tên">
+            <label for="user-email">Email:</label>
+            <input type="email" id="user-email" placeholder="Nhập email">
+            <button id="cancel-btn">Hủy</button>
+            <button id="save-btn">Lưu</button>
+        </div>
+    </div>
+
+    <div id="delete-confirm-modal" class="modal">
+        <div class="modal-content">
+            <h3>Xác nhận xóa</h3>
+            <p>Bạn có chắc chắn muốn xóa lịch này không?</p>
+            <button id="confirm-delete-btn">Xóa</button>
+            <button id="cancel-delete-btn">Hủy</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="../../assets/js/booking.js"></script>
+</body>
+
+</html>

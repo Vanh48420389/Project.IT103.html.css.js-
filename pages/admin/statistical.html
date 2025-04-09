@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../assets/css/styleStatistical.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>Admin Dashboard</h2>
+    <ul>
+      <li><a href="./statistical.html">Quản lý lịch</a></li>
+      <li><a href="./service.html">Quản lý dịch vụ</a></li>
+      <li><a href="../../home.html">Trang chủ</a></li>
+      <li><a href="../auth/login.html" class="logout">Đăng xuất</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h2>Thống kê lịch tập</h2>
+
+    <div class="stats-container">
+      <div class="stat-box"><h4>Tổng số lịch Gym</h4><span id="gym-count">0</span></div>
+      <div class="stat-box"><h4>Tổng số lịch Yoga</h4><span id="yoga-count">0</span></div>
+      <div class="stat-box"><h4>Tổng số lịch Zumba</h4><span id="zumba-count">0</span></div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="classChart"></canvas>
+    </div>
+
+    <div class="filter-container">
+      <select id="filterClass">
+        <option value="Tất cả">Tất cả</option>
+        <option value="Gym">Gym</option>
+        <option value="Yoga">Yoga</option>
+        <option value="Zumba">Zumba</option>
+      </select>
+      <input type="text" id="filterEmail" placeholder="Tìm theo email">
+      <input type="date" id="filterDate">
+      <button id="filterButton">Lọc</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Lớp học</th>
+          <th>Ngày tập</th>
+          <th>Khung giờ</th>
+          <th>Họ tên</th>
+          <th>Email</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Chỉnh sửa lịch tập</h2>
+      <form id="editForm">
+        <label for="classType">Lớp học:</label>
+        <select id="classType">
+          <option value="Gym">Gym</option>
+          <option value="Yoga">Yoga</option>
+          <option value="Zumba">Zumba</option>
+        </select>
+        <label for="date">Ngày tập:</label>
+        <input id="date" type="date">
+        <label for="timeSlot">Khung giờ:</label>
+        <select id="timeSlot">
+          <option value="06:00 - 08:00">06:00 - 08:00</option>
+          <option value="08:00 - 10:00">08:00 - 10:00</option>
+          <option value="10:00 - 12:00">10:00 - 12:00</option>
+          <option value="12:00 - 14:00">12:00 - 14:00</option>
+          <option value="14:00 - 16:00">14:00 - 16:00</option>
+          <option value="16:00 - 18:00">16:00 - 18:00</option>
+          <option value="18:00 - 20:00">18:00 - 20:00</option>
+        </select>
+        <label for="userName">Họ tên:</label>
+        <input id="userName" type="text">
+        <label for="userEmail">Email:</label>
+        <input id="userEmail" type="email">
+        <button type="button" onclick="saveChanges()">Lưu</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../assets/js/statistical.js"></script>
+</body>
+</html>

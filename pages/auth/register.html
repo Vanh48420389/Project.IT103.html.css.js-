@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../assets/css/styleRegister.css">
+    
+</head>
+
+<body>
+    <div class="register-container">
+        <h1>Đăng Kí Tài Khoản</h1>
+        <form id="registerForm">
+            <label for="name">Họ và tên</label>
+            <input type="text" id="name" placeholder="Nhập họ và tên">
+            <div class="error" id="nameError"></div>
+
+            <label for="Email">Email</label>
+            <input type="email" id="Email" placeholder="Nhập email">
+            <div class="error" id="emailError"></div>
+
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" placeholder="Nhập mật khẩu">
+            <div class="error" id="passwordError"></div>
+
+            <label for="confirm-password">Xác nhận mật khẩu</label>
+            <input type="password" id="confirm-password" placeholder="Xác nhận mật khẩu">
+            <div class="error" id="confirmPasswordError"></div>
+
+            <button type="submit">Đăng Kí</button>
+        </form>
+        <p>Đã có tài khoản? <a href="login.html">Đăng Nhập Ngay</a></p>
+    </div>
+    <script src="../../assets/js/register.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>
