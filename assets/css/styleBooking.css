@@ -95,7 +95,6 @@ td {
     font-size: 14px;
 }
 
-/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -171,7 +170,6 @@ td {
     background-color: #388E3C;
 }
 
-/* Định dạng chung cho các nút */
 .action-btn {
     padding: 8px 12px;
     font-size: 14px;
@@ -182,28 +180,23 @@ td {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Nút "Sửa" */
 .edit-btn {
     background-color: #4CAF50;
-    /* Màu xanh lá */
     color: white;
 }
 
 .edit-btn:hover {
     background-color: #45a049;
-    /* Màu xanh lá đậm hơn khi hover */
 }
 
-/* Nút "Xóa" */
+
 .delete-btn {
     background-color: #f44336;
-    /* Màu đỏ */
     color: white;
 }
 
 .delete-btn:hover {
     background-color: #d32f2f;
-    /* Màu đỏ đậm hơn khi hover */
 }
 
 #schedule-table th,

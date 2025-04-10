@@ -1,12 +1,12 @@
 let schedules = JSON.parse(localStorage.getItem("schedules")) || [];
-    let currentEditIndex = null;
+let currentEditIndex = null;
 
-    const displaySchedules = (data) => {
-      const tableBody = document.querySelector('table tbody');
-      tableBody.innerHTML = ""; // Xóa dữ liệu cũ
+const displaySchedules = (data) => {
+  const tableBody = document.querySelector('table tbody');
+  tableBody.innerHTML = "";
 
-      data.forEach((s, i) => {
-        tableBody.innerHTML += `
+  data.forEach((s, i) => {
+    tableBody.innerHTML += `
           <tr>
             <td>${s.classType}</td>
             <td>${s.date}</td>
@@ -18,58 +18,80 @@ let schedules = JSON.parse(localStorage.getItem("schedules")) || [];
               <button class="delete-btn" onclick="deleteSchedule(${i})">Xóa</button>
             </td>
           </tr>`;
-      });
-    };
+  });
+};
 
-    const editSchedule = (index) => {
-      currentEditIndex = index;
-      const s = schedules[index];
-      ['classType', 'date', 'timeSlot', 'userName', 'userEmail'].forEach(id => document.getElementById(id).value = s[id]);
-      document.getElementById('editModal').style.display = 'block';
-    };
+const editSchedule = (index) => {
+  currentEditIndex = index;
+  const s = schedules[index];
+  ['classType', 'date', 'timeSlot', 'userName', 'userEmail'].forEach(id => document.getElementById(id).value = s[id]);
+  document.getElementById('editModal').style.display = 'block';
+};
 
-    const closeModal = () => document.getElementById('editModal').style.display = 'none';
+const closeModal = () => document.getElementById('editModal').style.display = 'none';
 
-    const saveChanges = () => {
-      if (currentEditIndex === null) return;
-      const updated = {
-        classType: classType.value,
-        date: date.value,
-        timeSlot: timeSlot.value,
-        userName: userName.value,
-        userEmail: userEmail.value,
-      };
-      if (Object.values(updated).some(v => !v)) {
-        Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Vui lòng điền đủ thông tin!' });
-        return;
-      }
-      schedules[currentEditIndex] = updated;
+const saveChanges = () => {
+  if (currentEditIndex === null) return;
+  const updated = {
+    classType: classType.value,
+    date: date.value,
+    timeSlot: timeSlot.value,
+    userName: userName.value,
+    userEmail: userEmail.value,
+  };
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  function isValidName(name) {
+    const nameRegex = /^[A-Za-zÀ-ỹ\s]+$/;
+    return nameRegex.test(name);
+  };
+
+  if (Object.values(updated).some(v => !v)) {
+    Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Vui lòng điền đủ thông tin!' });
+    return;
+  }
+
+  if (!isValidEmail(updated.userEmail)) {
+    Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Email không hợp lệ!' });
+    return;
+  }
+
+  if (!isValidName(updated.userName)) {
+    Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Tên không hợp lệ!' });
+    return;
+  }
+
+  schedules[currentEditIndex] = updated;
+  localStorage.setItem('schedules', JSON.stringify(schedules));
+  displaySchedules(schedules);
+  closeModal();
+  Swal.fire({ icon: 'success', title: 'Thành công!', text: 'Lịch tập đã được cập nhật!' });
+};
+
+const deleteSchedule = (index) => {
+  Swal.fire({
+    title: 'Bạn có chắc muốn xóa?',
+    text: 'Hành động này không thể hoàn tác!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Xóa!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      schedules.splice(index, 1);
       localStorage.setItem('schedules', JSON.stringify(schedules));
       displaySchedules(schedules);
-      closeModal();
-      Swal.fire({ icon: 'success', title: 'Thành công!', text: 'Lịch tập đã được cập nhật!' });
-    };
+      Swal.fire('Xóa!', 'Lịch tập đã được xóa.', 'success');
+    }
+  });
+};
 
-    const deleteSchedule = (index) => {
-      Swal.fire({
-        title: 'Bạn có chắc muốn xóa?',
-        text: 'Hành động này không thể hoàn tác!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Xóa!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          schedules.splice(index, 1);
-          localStorage.setItem('schedules', JSON.stringify(schedules));
-          displaySchedules(schedules);
-          Swal.fire('Xóa!', 'Lịch tập đã được xóa.', 'success');
-        }
-      });
-    };
-
-    let chartInstance;
+let chartInstance;
 
 function loadStatistics() {
   const schedules = JSON.parse(localStorage.getItem("schedules")) || [];
@@ -83,7 +105,7 @@ function loadStatistics() {
   const chartElement = document.getElementById('classChart');
   if (chartElement) {
     if (chartInstance) {
-      chartInstance.destroy(); 
+      chartInstance.destroy();
     }
 
     chartInstance = new Chart(chartElement, {
@@ -110,7 +132,7 @@ function loadStatistics() {
   }
 };
 
-window.addEventListener('resize', loadStatistics); 
+window.addEventListener('resize', loadStatistics);
 
 document.getElementById('filterButton').addEventListener('click', () => {
   const classFilter = document.getElementById("filterClass").value;
@@ -128,21 +150,9 @@ document.getElementById('filterButton').addEventListener('click', () => {
   displaySchedules(filteredSchedules);
 });
 
-    window.onload = () => {
-      loadStatistics();
-      displaySchedules(schedules);
-    };
 
-    function filterSchedules() {
-  const classFilter = document.getElementById("filterClass").value;
-  const emailFilter = document.getElementById("filterEmail").value.trim().toLowerCase();
-  const dateFilter = document.getElementById("filterDate").value;
+window.onload = () => {
+  loadStatistics();
+  displaySchedules(schedules);
+};
 
-  const filtered = schedules.filter(s =>
-    (classFilter === "Tất cả" || s.classType === classFilter) &&
-    (!emailFilter || s.userEmail.toLowerCase().includes(emailFilter)) &&
-    (!dateFilter || s.date === dateFilter)
-  );
-
-  displaySchedules(filtered);
-}
