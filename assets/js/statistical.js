@@ -3,6 +3,8 @@ let schedules = JSON.parse(localStorage.getItem("schedules")) || [];
 
     const displaySchedules = (data) => {
       const tableBody = document.querySelector('table tbody');
+      tableBody.innerHTML = ""; // Xóa dữ liệu cũ
+
       data.forEach((s, i) => {
         tableBody.innerHTML += `
           <tr>
@@ -108,19 +110,23 @@ function loadStatistics() {
   }
 };
 
-window.addEventListener('resize', loadStatistics); // Lắng nghe sự kiện resize
+window.addEventListener('resize', loadStatistics); 
 
-    document.getElementById('filterButton').addEventListener('click', () => {
-      const classF = filterClass.value;
-      const emailF = filterEmail.value.trim().toLowerCase();
-      const dateF = filterDate.value;
-      const filtered = schedules.filter(s => {
-        return (classF === 'Tất cả' || s.classType === classF) &&
-               (!emailF || s.userEmail.toLowerCase().includes(emailF)) &&
-               (!dateF || s.date === dateF);
-      });
-      displaySchedules(filtered);
-    });
+document.getElementById('filterButton').addEventListener('click', () => {
+  const classFilter = document.getElementById("filterClass").value;
+  const emailFilter = document.getElementById("filterEmail").value.trim().toLowerCase();
+  const dateFilter = document.getElementById("filterDate").value;
+
+  const filteredSchedules = schedules.filter(schedule => {
+    const matchesClass = classFilter === "Tất cả" || schedule.classType === classFilter;
+    const matchesEmail = !emailFilter || schedule.userEmail.toLowerCase().includes(emailFilter);
+    const matchesDate = !dateFilter || schedule.date === dateFilter;
+
+    return matchesClass && matchesEmail && matchesDate;
+  });
+
+  displaySchedules(filteredSchedules);
+});
 
     window.onload = () => {
       loadStatistics();

@@ -87,6 +87,12 @@ if (!currentUser) {
             return;
         }
 
+        const nameRegex = /^[A-Za-zÀ-ỹ\s]+$/;
+            if (!nameRegex.test(name)) {
+            Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Tên không hợp lệ!' });
+            return;
+        }
+
 
 
 
@@ -151,5 +157,5 @@ if (!currentUser) {
     document.getElementById("cancel-delete-btn").addEventListener("click", () => {
         document.getElementById("delete-confirm-modal").style.display = "none";
         rowToDelete = null;
-    });
-}
+    }); 
+};
