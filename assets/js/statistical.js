@@ -50,6 +50,15 @@ const saveChanges = () => {
     return nameRegex.test(name);
   };
 
+  const isDuplicate = schedules.some((schedule, index) => {
+    return (
+      index !== currentEditIndex && 
+      schedule.date === updated.date &&
+      schedule.timeSlot === updated.timeSlot
+    );
+  });
+
+
   if (Object.values(updated).some(v => !v)) {
     Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Vui lòng điền đủ thông tin!' });
     return;
@@ -62,6 +71,11 @@ const saveChanges = () => {
 
   if (!isValidName(updated.userName)) {
     Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Tên không hợp lệ!' });
+    return;
+  }
+
+  if (isDuplicate) {
+    Swal.fire({ icon: 'error', title: 'Lỗi!', text: 'Khung giờ này đã được đặt!' });
     return;
   }
 
@@ -155,4 +169,5 @@ window.onload = () => {
   loadStatistics();
   displaySchedules(schedules);
 };
+
 
